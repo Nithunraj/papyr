@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'styles/global.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/modal.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/media.css' %}" />
+    <link rel="shortcut icon" href="{% static 'assets/favicon.svg' %}" type="image/x-icon" />
+
+    <!-- Material icons  -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <title>Paypr</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- LOAD ASIDE BAR HERE -->
+      {% include 'includes/asidebar.html' %}
+      {% block content %}
+
+      {% endblock %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'scripts/index.js' %}"></script>
+    <script src="{% static 'scripts/theme.js' %}"></script>
+    <script src="{% static 'scripts/menuAndModal.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+{% load static %}
+<aside>
+<div class="top">
+    <div class="logo">
+        <a href="../../index.html">
+        <img src="{% static 'assets/logo.svg' %}" alt="Logo Monances" />
+        </a>
+        <a href="../../index.html">
+            <h3>monances</h3>
+        </a>
+    </div>
+    <div class="close" id="close-btn">
+        <span class="material-icons" onclick="MobileMenu.close()"
+            >close</span
+            >
+    </div>
+</div>
+<div class="sidebar">
+    <a href="./dashboard.html" class="active">
+        <span class="material-icons">grid_view</span>
+        <p>Dashboard</p>
+    </a>
+    <a href="">
+        <span class="material-icons">contact_page</span>
+        <p>Contact</p>
+    </a>
+    <a href="{% url 'logout' %}">
+        <span class="material-icons">logout</span>
+        <p>Exit</p>
+    </a>
+</div>
+</aside>
