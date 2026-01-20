@@ -30,15 +30,6 @@ def create_default_wallets_and_categories(sender, instance, created, **kwargs):
         Category(user=instance, name="Bills", type="expense"),
     ])
 
-    # Default categories
-    Category.objects.bulk_create([
-        Category(user=instance, name="Salary", type="income"),
-        Category(user=instance, name="Business", type="income"),
-        Category(user=instance, name="Food", type="expense"),
-        Category(user=instance, name="Travel", type="expense"),
-        Category(user=instance, name="Bills", type="expense"),
-    ])
-
     UserProfile.objects.create(user=instance)
 
 # Update wallet balance when a transaction is created
