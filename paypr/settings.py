@@ -29,8 +29,13 @@ SECRET_KEY = 'django-insecure-u8*0wq5tg-ib_*sggdf5+fx^eg!5&+7)#7s#=$800k!tg&o*js
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['papyr-us0e.onrender.com']
-# ALLOWED_HOSTS = []
+RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
+
+ALLOWED_HOSTS = []
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
+ALLOWED_HOSTS += ["localhost", "127.0.0.1"]
 
 
 AUTH_USER_MODEL = 'accounts.User'
