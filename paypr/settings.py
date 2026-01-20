@@ -29,8 +29,8 @@ SECRET_KEY = 'django-insecure-u8*0wq5tg-ib_*sggdf5+fx^eg!5&+7)#7s#=$800k!tg&o*js
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['papyr-us0e.onrender.com']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['papyr-us0e.onrender.com']
+# ALLOWED_HOSTS = []
 
 
 AUTH_USER_MODEL = 'accounts.User'
