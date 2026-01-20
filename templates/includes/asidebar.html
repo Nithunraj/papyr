@@ -6,7 +6,7 @@
         <img src="{% static 'assets/logo.svg' %}" alt="Logo Monances" />
         </a>
         <a href="../../index.html">
-            <h3>monances</h3>
+            <h3>Paypr</h3>
         </a>
     </div>
     <div class="close" id="close-btn">
@@ -16,13 +16,13 @@
     </div>
 </div>
 <div class="sidebar">
-    <a href="./dashboard.html" class="active">
+    <a href="{% url 'dashboard' %}" class="active">
         <span class="material-icons">grid_view</span>
         <p>Dashboard</p>
     </a>
-    <a href="">
+    <a href="{% url 'profile' %}">
         <span class="material-icons">contact_page</span>
-        <p>Contact</p>
+        <p>Profile</p>
     </a>
     <a href="{% url 'logout' %}">
         <span class="material-icons">logout</span>

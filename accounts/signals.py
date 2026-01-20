@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from decimal import Decimal
 
 from expenses.models import Wallet, Category, Transaction
+from accounts.models import UserProfile
 
 User = get_user_model()
 
@@ -28,6 +29,17 @@ def create_default_wallets_and_categories(sender, instance, created, **kwargs):
         Category(user=instance, name="Travel", type="expense"),
         Category(user=instance, name="Bills", type="expense"),
     ])
+
+    # Default categories
+    Category.objects.bulk_create([
+        Category(user=instance, name="Salary", type="income"),
+        Category(user=instance, name="Business", type="income"),
+        Category(user=instance, name="Food", type="expense"),
+        Category(user=instance, name="Travel", type="expense"),
+        Category(user=instance, name="Bills", type="expense"),
+    ])
+
+    UserProfile.objects.create(user=instance)
 
 # Update wallet balance when a transaction is created
 @receiver(post_save, sender=Transaction)

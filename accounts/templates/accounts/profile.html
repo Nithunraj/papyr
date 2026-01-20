@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'accounts/css/profile.css' %}" />
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="profile-wrapper">
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    {{ user.get_full_name|slice:":1"|upper }}
+                </div>
+
+                <div class="profile-info">
+                    <h3>{{ user.get_full_name|default:user.username }}</h3>
+                    <small>{{ user.email }}</small>
+                </div>
+            </div>
+
+            <div class="profile-body">
+                <div class="profile-row">
+                    <span>Username</span>
+                    <span>{{ user.username }}</span>
+                </div>
+
+                <div class="profile-row">
+                    <span>Full Name</span>
+                    <span>{{ profile.full_name|default:'-' }}</span>
+                </div>
+
+                <div class="profile-row">
+                    <span>Phone Number</span>
+                    <span>{{ profile.phone_number|default:'-' }}</span>
+                </div>
+
+                <div class="profile-row">
+                    <span>Email</span>
+                    <span class="email-status">
+                        {{ user.email|default:'-' }}
+
+                        {% if user.is_email_verified %}
+                            <span class="verified" title="Email verified">✔
+                                <span class="tooltip">verified</span>
+                            </span>
+                        {% else %}
+                            <span class="not-verified" title="Email not verified">✖
+                                <span class="tooltip">Not verified</span>
+                            </span>
+                        {% endif %}
+                    </span>
+                </div>
+
+                <div class="profile-row">
+                    <span>Currency</span>
+                    <span>{{ user.currency }}</span>
+                </div>
+
+                <div class="profile-row">
+                    <span>Timezone</span>
+                    <span>{{ user.timezone }}</span>
+                </div>
+
+                <div class="profile-row">
+                    <span>Language</span>
+                    <span>{{ user.language }}</span>
+                </div>
+                <div class="profile-row">
+                    <span>Account Status</span>
+                    <span>{{ user.account_status }}
+                         <!-- Indicator -->
+                        <span class="status-indicator {{ user.account_status|lower }}"></span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <a href="#" class="btn primary" id="editProfileBtn">Edit Profile</a>
+                <a href="" class="btn outline">Change Password</a>
+            </div>
+        </div>
+    </div>
+    <!-- EDIT PROFILE POPUP -->
+    <div class="modal-overlay" id="editProfileModal">
+        <div class="modal">
+            <h3 class="edit-popup-layer">Edit Profile</h3>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label class="edit-popup-layer">Full Name</label>
+                    {{ form.full_name }}
+                </div>
+
+                <div class="form-group">
+                    <label class="edit-popup-layer">Phone Number</label>
+                    {{ form.phone_number }}
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn outline" id="closeModal">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn primary">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+ <script src="{% static 'accounts/js/profile.js' %}"></script>
+{% endblock %}

@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, UserProfileForm
 from django.contrib import messages
+from .models import UserProfile
 
 # Create your views here.
 def login_view(request):
@@ -33,7 +34,18 @@ def register_user(request):
             user = form.save()  # Signals will handle default wallets & categories
             messages.success(request, "Account created successfully. Please log in.")
             return redirect("login")  # your login page
+        else:
+            print(form.errors)
     else:
         form = CustomUserCreationForm()
 
     return render(request, "accounts/register.html", {"form": form})
+
+def view_my_profile(request):
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
+    form = UserProfileForm(instance=profile)
+
+    return render(request, "accounts/profile.html", {
+        "form": form,
+        "profile": profile,
+    })
