@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
-from .forms import CustomUserCreationForm, UserProfileForm
+from .forms import CustomUserCreationForm, UserProfileForm, ChangePasswordForm
 from django.contrib import messages
 from .models import UserProfile
 
@@ -43,9 +43,20 @@ def register_user(request):
 
 def view_my_profile(request):
     profile, created = UserProfile.objects.get_or_create(user=request.user)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
     form = UserProfileForm(instance=profile)
 
     return render(request, "accounts/profile.html", {
         "form": form,
         "profile": profile,
     })
+
+def changePassword(request):
+    form = ChangePasswordForm()
+    print(form)
+    return redirect("profile")
