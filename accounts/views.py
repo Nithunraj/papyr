@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_http_methods
 from django.contrib.auth import authenticate, login
 from .forms import CustomUserCreationForm, UserProfileForm, ChangePasswordForm
 from django.contrib import messages
@@ -43,6 +44,7 @@ def register_user(request):
 
 def view_my_profile(request):
     profile, created = UserProfile.objects.get_or_create(user=request.user)
+    changePasswordForm = ChangePasswordForm()
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=profile)
         if form.is_valid():
@@ -54,9 +56,11 @@ def view_my_profile(request):
     return render(request, "accounts/profile.html", {
         "form": form,
         "profile": profile,
+        "passwordForm":changePasswordForm,
     })
 
-def changePassword(request):
+@require_http_methods(["POST"])
+def updatePassword(request):
     form = ChangePasswordForm()
     print(form)
     return redirect("profile")

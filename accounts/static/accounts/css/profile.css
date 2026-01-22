@@ -187,3 +187,7 @@
 .form-group input:last-child {
   margin-top: .5rem;
 }
+
+#editProfileBtn:hover {
+  color: #edeffd;
+}

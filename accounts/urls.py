@@ -7,7 +7,7 @@ urlpatterns = [
     path("logout/", LogoutView.as_view(), name='logout'),
     path("register_user/", views.register_user, name='register_user'),
     path("view_my_profile/", views.view_my_profile, name='profile'),
-    # path("update_my_profile/", views.update_my_profile, name='update_profile'),
+    path("update_password/", views.updatePassword, name='update_password'),
     path("home/", include('dashboard.urls')),
     path("api/expenses/", include('expenses.urls')),
 ]

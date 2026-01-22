@@ -13,13 +13,18 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ['full_name', 'phone_number']
 
-class ChangePasswordForm(forms.ModelForm):
+class ChangePasswordForm(forms.Form):
     old_password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class':'form-control'}),
-        label="Current Password"
     )
 
     new_password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class':'form-control'}),
-        label="New Password"
     )
+
+    confirm_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class':'form-control'}),
+    )
+
+    def clean(self):
+        pass
