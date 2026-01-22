@@ -388,3 +388,10 @@ function confirmLogout(e) {
     }
     return false;
 }
+
+const mainContent = document.getElementById('main-content');
+
+    // Add click listener to main
+    mainContent.addEventListener('click', () => {
+        MobileMenu.close();
+});
