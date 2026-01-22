@@ -23,3 +23,11 @@ def expense_by_category(request):
     print(data)
 
     return JsonResponse(data)
+
+def independent_transaction_details(request):
+    transactions = Transaction.objects.filter(user=request.user)
+    print(transactions)
+
+    data = {}
+
+    return JsonResponse(data)

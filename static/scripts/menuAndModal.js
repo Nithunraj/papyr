@@ -17,6 +17,16 @@ const Modal = {
   },
 };
 
+const Modal_incomes = {
+  open() {
+    document.getElementById("modalOverlayIncomes").classList.add("active");
+  },
+  close() {
+    document.getElementById("modalOverlayIncomes").classList.remove("active");
+    Form.clearFields();
+  },
+};
+
 // Display date (November, 24)
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
