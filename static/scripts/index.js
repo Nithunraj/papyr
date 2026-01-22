@@ -379,3 +379,12 @@ links.forEach(link => {
     link.classList.add("active");
   };
 });
+
+function confirmLogout(e) {
+    e.preventDefault();  // stop default link action
+    const confirmed = confirm("Are you sure you want to logout?");
+    if (confirmed) {
+        window.location.href = e.currentTarget.href; // redirect if confirmed
+    }
+    return false;
+}

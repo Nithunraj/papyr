@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .forms import CustomUserCreationForm, UserProfileForm, ChangePasswordForm
 from django.contrib import messages
 from .models import UserProfile
@@ -27,6 +27,10 @@ def login_view(request):
         })
 
     return render(request, "accounts/login.html")
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 def register_user(request):
     if request.method == "POST":
