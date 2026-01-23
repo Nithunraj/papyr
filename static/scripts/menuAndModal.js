@@ -18,12 +18,21 @@ const Modal = {
 };
 
 const Modal_incomes = {
-  open() {
-    document.getElementById("modalOverlayIncomes").classList.add("active");
+  open(overlayFor) {
+    if (overlayFor === "income") {
+      document.getElementById("modalOverlayIncomes").classList.add("active");
+    } else {
+      document.getElementById("modalOverlayExpenses").classList.add("active");
+    }
   },
-  close() {
-    document.getElementById("modalOverlayIncomes").classList.remove("active");
-    Form.clearFields();
+  close(closeOverlayFor) {
+    if (closeOverlayFor === "income") {
+      document.getElementById("modalOverlayIncomes").classList.remove("active");
+      Form.clearFields();
+    } else {
+      document.getElementById("modalOverlayExpenses").classList.remove("active");
+      Form.clearFields();
+    }
   },
 };
 

@@ -1,0 +1,60 @@
+<form method="get" class="filters">
+    <select name="category">
+        <option value="">All Categories</option>
+        {% for c in categories %}
+        <option value="{{ c.id }}" {% if request.GET.category == c.id|stringformat:"s" %}selected{% endif %}>
+            {{ c.name }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <select name="wallet">
+        <option value="">All Wallets</option>
+        {% for w in wallets %}
+        <option value="{{ w.id }}" {% if request.GET.wallet == w.id|stringformat:"s" %}selected{% endif %}>
+            {{ w.name }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <select name="type">
+        <option value="">All Types</option>
+        <option value="income" {% if request.GET.type == "income" %}selected{% endif %}>Income</option>
+        <option value="expense" {% if request.GET.type == "expense" %}selected{% endif %}>Expense</option>
+    </select>
+
+    <input type="date" name="start_date" value="{{ request.GET.start_date }}">
+    <input type="date" name="end_date" value="{{ request.GET.end_date }}">
+
+    <button type="submit">Filter</button>
+    <a href="{% url 'transaction_list' %}" class="reset">Reset</a>
+</form>
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Category</th>
+            <th>Wallet</th>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for t in transactions %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ t.category.name }}</td>
+            <td>{{ t.wallet.name }}</td>
+            <td class="{% if t.transaction_type == 'income' %}income{% else %}expense{% endif %}">
+                ₹{{ t.amount }}
+            </td>
+            <td>{{ t.transaction_date }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No transactions found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

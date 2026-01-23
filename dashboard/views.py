@@ -16,13 +16,17 @@ def dashboard(request):
     wallets = Wallet.objects.filter(user=request.user, is_active=True)
     categories = Category.objects.filter(user=request.user)
 
-    income = transactions.filter(
+    income_transactions = transactions.filter(
         transaction_type="income"
-    ).aggregate(total=Sum("amount"))["total"] or 0
+    )
+    
+    income = income_transactions.aggregate(total=Sum("amount"))["total"] or 0
 
-    expense = transactions.filter(
+    expense_transactions = transactions.filter(
         transaction_type="expense"
-    ).aggregate(total=Sum("amount"))["total"] or 0
+    )
+    
+    expense = expense_transactions.aggregate(total=Sum("amount"))["total"] or 0
 
     context = {
         "transactions": transactions,
@@ -31,6 +35,8 @@ def dashboard(request):
         "income_total": income,
         "expense_total": expense,
         "balance": income - expense,
+        "income_transactions": income_transactions,
+        "expense_transactions":expense_transactions,
     }
 
     return render(request, "dashboard/dashboard.html", context)

@@ -7,10 +7,101 @@
             <span
                 class="material-icons"
                 id="close-modal-btn"
-                onclick="Modal_incomes.close()"
+                onclick="Modal_incomes.close('income')"
                 >close</span
                 >
         </div>
         <small>Last 10 Incomes</small>
+        <div class="table-container">
+            <table id="data-table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th style="text-align: center;">Category</th>
+                    <th style="text-align: center;">Wallet</th>
+                    <th style="text-align: center;">Amount</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for v in income_transactions %}
+                <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ v.category.name }}</td>
+                <td>{{ v.wallet.name }}</td>
+                <td>
+                    {% if v.transaction_type == "income" %}
+                        <span class="income">+ ₹{{ v.amount }}</span>
+                    {% else %}
+                        <span class="expense">- ₹{{ v.amount }}</span>
+                    {% endif %}
+                </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">No transactions found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+            <div style="text-align:center; margin-top:2rem;">
+                <a href="" id="more-details-tag" style="color: var(--color-dark);">more details..</a>
+            </div>
+        </div>
     </div>
+</div>
+</div>
+<div class="modal-overlay-expenses" id="modalOverlayExpenses">
+    <div class="modal">
+        <div id="form">
+            <div class="modalTop">
+                <h2>Expense Details</h2>
+                <span
+                    class="material-icons"
+                    id="close-modal-btn"
+                    onclick="Modal_incomes.close('expense')"
+                >close</span>
+            </div>
+
+            <small>Last 10 expenses</small>
+
+            <div class="table-container">
+                <table id="data-table">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th style="text-align: center;">Category</th>
+                            <th style="text-align: center;">Wallet</th>
+                            <th style="text-align: center;">Amount</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for v in expense_transactions %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ v.category.name }}</td>
+                            <td>{{ v.wallet.name }}</td>
+                            <td>
+                                {% if v.transaction_type == "income" %}
+                                    <span class="income">+ ₹{{ v.amount }}</span>
+                                {% else %}
+                                    <span class="expense">- ₹{{ v.amount }}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6">No transactions found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div style="text-align:center; margin-top:2rem;">
+                    <a href="" id="more-details-tag" style="color: var(--color-dark);">more details..</a>
+                </div>
+            </div>
+
+        </div>
     </div>
+</div>

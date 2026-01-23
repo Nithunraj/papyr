@@ -8,7 +8,7 @@
 </div>
 <section id="balance">
     <h2 class="sr-only">Balance</h2>
-    <div class="card" onclick="Modal_incomes.open()">
+    <div class="card" onclick="Modal_incomes.open('income')">
         <h3>
             <span>Incomes</span>
             <img src="{% static 'assets/incomes.svg' %}" alt="Income image" />
@@ -16,7 +16,7 @@
         <p id="incomeDisplay">{{ income_total }}</p>
         <p id="dateDisplay"></p>
     </div>
-    <div class="card">
+    <div class="card" onclick="Modal_incomes.open('expense')">
         <h3>
             <span>Expenses</span>
             <img src="{% static 'assets/expenses.svg' %}" alt="Expense image" />
