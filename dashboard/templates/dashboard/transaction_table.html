@@ -12,7 +12,14 @@
     </thead>
     <tbody>
         {% for v in transactions %}
-        <tr onclick="openTransactionPopup('{{ v.id }}')" style="cursor:pointer;">
+        <tr onclick="openTransactionPopup(
+        '{{ v.id }}',
+        '{{ v.title_field }}',
+        '{{ v.wallet.id }}',
+        '{{ v.category.id }}',
+        '{{ v.title_field }}',
+        )" 
+        style="cursor:pointer;">
         <td>{{ forloop.counter }}</td>
         <td class="truncate_title">{{ v.title_field }}</td>
         <td>{{ v.category.name }}</td>

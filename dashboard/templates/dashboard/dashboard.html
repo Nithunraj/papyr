@@ -54,4 +54,9 @@
     <span class="material-icons">add</span>
     </button>
 </div>
+{% include 'dashboard/transactions_edit.html' %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'scripts/dashboard.js' %}"></script>
 {% endblock %}

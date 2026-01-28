@@ -1,0 +1,104 @@
+{% load static %}
+<div class="modal-overlay" id="transactionModal">
+   <div class="modal">
+      <div id="form">
+         <div class="modalTop">
+            <h2>View Transaction</h2>
+            <span
+               class="material-icons"
+               id="close-modal-btn"
+               onclick="ModalEditTransactions.close()"
+               >close</span
+               >
+         </div>
+         <form action="{% url 'add_transactions' %}" method="post">
+            {% csrf_token %}
+            <div class="drop-down-wallet-categories">
+               <div>
+                  <label class="sr-only" for="wallet">Wallet</label>
+                  <select class="drop-down-wallet" id="wallet" name="wallet" required>
+                     <option value="">Select Wallet</option>
+                     {% for w in wallets %}
+                     <option value="{{ w.id }}"
+                     >{{ w.name }}</option>
+                     {% endfor %}
+                  </select>
+               </div>
+               <div>
+                  <label class="sr-only" for="category">Category</label>
+                  <select class="drop-down-categories" id="category" name="category" required>
+                     <option value="">Select Category</option>
+                     {% for c in categories %}
+                     <option value="{{ c.id }}" data-type="{{ c.type }}">
+                        {{ c.name }}
+                     </option>
+                     {% endfor %}
+                  </select>
+               </div>
+            </div>
+            <div class="input-group">
+               <label class="sr-only" for="Title">Title*</label>
+               <input
+                  type="text"
+                  id="title"
+                  name="title_field"
+                  placeholder="Title"
+                  required
+                  />
+            </div>
+            <div class="input-group">
+               <label class="sr-only" for="description">description</label>
+               <input
+                  type="text"
+                  id="description"
+                  name="description"
+                  placeholder="Description"
+                  style="margin-top:0;"
+                  />
+            </div>
+            <div class="input-group">
+               <label class="sr-only" for="amount">Amount*</label>
+               <input
+                  type="number"
+                  id="amount"
+                  name="amount"
+                  step="0.01"
+                  placeholder="0.00"
+                  required
+                  />
+               <small class="help"
+                  >Select "Income" to incomes and "Expense" to expenses</small
+                  >
+            </div>
+            <input type="hidden" name="transaction_type" id="transaction_type"  value="income">
+            <div class="buttons-income-expense">
+               <button
+                  id="incomeButton"
+                  onclick="Form.setIncome();  return false;"
+                  class="income"
+                  name="transaction_type">
+               Income
+               </button>
+               <button
+                  id="expenseButton"
+                  onclick="Form.setExpense(); return false;"
+                  name="transaction_type">
+               Expense
+               </button>
+            </div>
+            <div class="input-group">
+               <label class="sr-only" for="date">Date</label>
+               <input
+                  type="date"
+                  id="date"
+                  name="transaction_date"
+               />
+            </div>
+            <div class="actions">
+               <!-- <a href="#" id="cancelTransaction" class="button cancel" onclick="Modal.close()">Cancelar</a> -->
+               <button class="save" type="submit">Confirm</button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
