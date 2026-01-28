@@ -251,12 +251,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
     /* vertical-align: middle; */
-    line-height: 1.4;
+    line-height: 2.8;
 }
 
 .truncate_amount {
     display: inline-block;
-    max-width: 10ch;   /* adjust based on your table */
+    max-width: 8ch;   /* adjust based on your table */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
