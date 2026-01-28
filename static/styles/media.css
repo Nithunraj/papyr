@@ -241,4 +241,34 @@
  .remove-transaction {
   width: 1.5rem;
  }
+
+ .truncate_title {
+    display: block;
+    padding: 0;
+    margin: 0;
+    max-width: 12ch;   /* adjust based on your table */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* vertical-align: middle; */
+    line-height: 1.4;
+}
+
+.truncate_amount {
+    display: inline-block;
+    max-width: 10ch;   /* adjust based on your table */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+
+.truncate_amount:hover {
+    overflow: visible;
+    white-space: normal;
+    background: var(--color-background);
+    z-index: 10;
+    position: relative;
+}
+
 }

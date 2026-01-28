@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import User
+from django.utils import timezone
 
 # Create your models here.
 class Wallet(models.Model):
@@ -26,6 +27,13 @@ class Transaction(models.Model):
     transaction_type = models.CharField(
         max_length=10,
         choices=[('income','Income'), ('expense','Expense')]
+    )
+
+    title_field = models.CharField(
+    max_length=255,
+    default="Untitled",
+    null=True,
+    blank=True
     )
 
     description = models.TextField(blank=True)

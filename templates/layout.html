@@ -99,31 +99,34 @@
                      </div>
                   </div>
                   <div class="input-group">
-                     <label class="sr-only" for="description">Description</label>
+                     <label class="sr-only" for="Title">Title*</label>
+                     <input
+                        type="text"
+                        id="title"
+                        name="title_field"
+                        placeholder="Title"
+                        required
+                        />
+                  </div>
+                  <div class="input-group">
+                     <label class="sr-only" for="description">description</label>
                      <input
                         type="text"
                         id="description"
                         name="description"
                         placeholder="Description"
+                        style="margin-top:0;"
                         />
                   </div>
                   <div class="input-group">
-                     <label class="sr-only" for="description">Title</label>
-                     <input
-                        type="text"
-                        id="description"
-                        name="description"
-                        placeholder="Description"
-                        />
-                  </div>
-                  <div class="input-group">
-                     <label class="sr-only" for="amount">Amount</label>
+                     <label class="sr-only" for="amount">Amount*</label>
                      <input
                         type="number"
                         id="amount"
                         name="amount"
                         step="0.01"
                         placeholder="0.00"
+                        required
                         />
                      <small class="help"
                         >Select "Income" to incomes and "Expense" to expenses</small
@@ -147,7 +150,11 @@
                   </div>
                   <div class="input-group">
                      <label class="sr-only" for="date">Date</label>
-                     <input type="date" id="date" name="transaction_date" />
+                     <input
+                        type="date"
+                        id="date"
+                        name="transaction_date"
+                     />
                   </div>
                   <div class="actions">
                      <!-- <a href="#" id="cancelTransaction" class="button cancel" onclick="Modal.close()">Cancelar</a> -->
@@ -158,6 +165,23 @@
          </div>
       </div>
       {% include 'includes/amountpopups.html' %}
+
+      {% if messages %}
+      <div class="toast-container">
+      {% for message in messages %}
+         <div class="toast {{ message.tags }}">
+            {{ message }}
+         </div>
+      {% endfor %}
+      </div>
+      {% endif %}
+
+      <script>
+      setTimeout(() => {
+         document.querySelectorAll('.toast').forEach(t => t.remove());
+      }, 4500);
+      </script>
+
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
       <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -364,3 +364,37 @@ canvas{
   text-decoration: none;
   font-weight: 500;
 }
+
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.toast {
+  min-width: 260px;
+  margin-top: 10px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 14px;
+  animation: slideIn 0.4s ease, fadeOut 0.4s ease 4s forwards;
+}
+
+.toast.error {
+  background: #e53935;
+}
+
+.toast.success {
+  background: #43a047;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; transform: translateX(100%); }
+}

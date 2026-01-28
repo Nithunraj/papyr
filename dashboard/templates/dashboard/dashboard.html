@@ -31,7 +31,7 @@
         <p id="totalDisplay">{{ balance }}</p>
     </div>
 </section>
-<!--END OF BALANCED SECTION-------------------- -->
+<!--END OF BALANCED SECTION-->
 <section id="transaction">
     <h2 class="sr-only">Transactions</h2>
     <div class="last-transactions">
@@ -46,40 +46,7 @@
             + New Transaction
             </button>
         </div>
-        <div class="table-container">
-            <table id="data-table">
-            <thead>
-                <tr>
-                    <th>S.No</th>
-                    <th>Category</th>
-                    <th>Wallet</th>
-                    <th>Amount</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for v in transactions %}
-                <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ v.category.name }}</td>
-                <td>{{ v.wallet.name }}</td>
-                <td>
-                    {% if v.transaction_type == "income" %}
-                        <span class="income">+ ₹{{ v.amount }}</span>
-                    {% else %}
-                        <span class="expense">- ₹{{ v.amount }}</span>
-                    {% endif %}
-                </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="6">No transactions found</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            </table>
-        </div>
-    </div>
+        {% include 'dashboard/transaction_table.html' %}
 </section>
 <!--END OF TRANSACTION SECTION-------------------- -->
 <div class="addTransactionMobileButton">

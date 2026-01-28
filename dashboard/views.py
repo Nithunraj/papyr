@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.contrib import messages
 # from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from expenses.models import Transaction, Category, Wallet
@@ -48,7 +49,10 @@ def add_transactions(request):
             transaction = form.save(commit=False)
             transaction.user = request.user
             transaction.save()
+            messages.success(request, "Transaction successfully added")
             return redirect('dashboard')
         else:
-            print(form.errors)
-    return dashboard(request)
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, field + ' - ' + error)
+    return redirect('dashboard')
