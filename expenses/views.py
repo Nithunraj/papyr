@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
+from django.contrib import messages
 from .models import Transaction
+from .forms import AddTransactionForm as UpdateTransactionForm
 from dashboard import views as dashboard_view
 from django.db.models import Sum
 
@@ -25,9 +27,16 @@ def expense_by_category(request):
     return JsonResponse(data)
 
 def update_transactions(request):
-    print(request.POST)
-    
+    if request.method == "POST":
+        instance = get_object_or_404(Transaction, id=request.POST.get("id"))
+        form = UpdateTransactionForm(request.POST, instance=instance)
 
-    data = {}
-
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Sucessfully updated")
+            return redirect('dashboard')
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, field + ' - ' + error)
     return redirect('dashboard')
