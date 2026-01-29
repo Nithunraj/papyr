@@ -222,7 +222,7 @@ button.save-mode {
   z-index: 9999;
 
   max-height: 60vh; 
-  width: 15vh;       /* 👈 mobile browser safe */
+  width: 16vh;       /* 👈 mobile browser safe */
   overflow-y: auto;
 
   display: none;

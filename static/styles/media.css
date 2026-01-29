@@ -271,4 +271,14 @@
     position: relative;
 }
 
+.topMenu {
+  overflow: visible;
+}
+
+#date-display {
+  position: relative;  /* or absolute if needed */
+  z-index: 100;
+  bottom: 10px; 
+  left: 50px;
+}
 }
