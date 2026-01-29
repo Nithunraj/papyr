@@ -167,6 +167,20 @@ const Form = {
     document.getElementById("transaction_type").value = "expense";
   },
 
+  setIncomeView() {
+    Form.incomeOrExpense = "income";
+    document.querySelector(".incomeButtonView").classList.add("income");
+    document.querySelector(".expenseButtonView").classList.remove("expense");
+    document.querySelector(".transaction_type_view").value = "income";
+  },
+
+  setExpenseView() {
+    Form.incomeOrExpense = "expense";
+    document.querySelector(".expenseButtonView").classList.add("expense");
+    document.querySelector(".incomeButtonView").classList.remove("income");
+    document.querySelector(".transaction_type_view").value = "expense";
+  },
+
   getValues() {
     //get input (modal) values
     return {

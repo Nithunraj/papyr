@@ -83,7 +83,20 @@
   cursor: pointer
 }
 
-.modal button.save:hover{
+.modal button.delete{
+  border: none;
+  background: var(--color-red);
+  color: black;;
+  width: 100%;
+  transition: all 300ms ease;
+
+  padding: 1rem 4rem;
+  border-radius: .50rem;
+  cursor: pointer
+}
+
+.modal button.save:hover,
+.modal button.delete:hover{
   filter: brightness(0.9);
 }
 
@@ -173,4 +186,9 @@
   cursor: pointer;
 
   user-select: none;
+}
+
+button.save-mode {
+  background-color: #4caf50 !important;
+  color: #fff;
 }

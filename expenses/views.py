@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import Transaction
 from dashboard import views as dashboard_view
@@ -24,9 +24,10 @@ def expense_by_category(request):
 
     return JsonResponse(data)
 
-def filter_details_transactions(request):
+def update_transactions(request):
+    print(request.POST)
     
 
     data = {}
 
-    return JsonResponse(data)
+    return redirect('dashboard')
