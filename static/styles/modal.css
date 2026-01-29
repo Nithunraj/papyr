@@ -126,6 +126,15 @@
   justify-content: center;
 }
 
+.input-group-view-transaction{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-group-view-transaction label{
+  align-self: flex-start;    /* 👈 override only label */
+}
 
 .buttons-income-expense{
   margin-top: 2rem;

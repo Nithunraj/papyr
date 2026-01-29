@@ -11,12 +11,12 @@
                >close</span
                >
          </div>
-         <form action="{% url 'update_transactions' %}" method="post">
+         <form action="{% url 'update_transactions' %}" method="post" id="demoForm">
             {% csrf_token %}
             <input type="hidden" name="id" id="transaction_id" value="">
             <div class="drop-down-wallet-categories">
                <div>
-                  <label class="sr-only" for="wallet">Wallet</label>
+                  <label class="sr-only-view-transactions" for="wallet">Wallet Type <span style="color:red">*</span></label>
                   <select class="drop-down-wallet view-transaction-wallet" id="wallet" name="wallet" required>
                      <option value="">Select Wallet</option>
                      {% for w in wallets %}
@@ -26,7 +26,7 @@
                   </select>
                </div>
                <div>
-                  <label class="sr-only" for="category">Category</label>
+                  <label class="sr-only-view-transactions" for="category">Category Type <span style="color:red">*</span></label>
                   <select class="drop-down-categories view-transaction-categories" id="category" name="category" required>
                      <option value="">Select Category</option>
                      {% for c in categories %}
@@ -37,19 +37,20 @@
                   </select>
                </div>
             </div>
-            <div class="input-group">
-               <label class="sr-only" for="Title">Title*</label>
+            <div class="input-group-view-transaction">
+               <label class="sr-only-view-transactions" style="margin-top: 2rem;" for="Title">Title <span style="color:red">*</span></label>
                <input
                   type="text"
                   id="title"
                   class="view-transaction-title"
                   name="title_field"
                   placeholder="Title"
+                  style="margin-top: 0;"
                   required
                   />
             </div>
-            <div class="input-group">
-               <label class="sr-only" for="description">description</label>
+            <div class="input-group-view-transaction">
+               <label class="sr-only-view-transactions" for="description">Description</label>
                <input
                   type="text"
                   id="description"
@@ -59,8 +60,8 @@
                   style="margin-top:0;"
                   />
             </div>
-            <div class="input-group">
-               <label class="sr-only" for="amount">Amount*</label>
+            <div class="input-group-view-transaction">
+               <label class="sr-only-view-transactions" for="amount">Amount <span style="color:red">*</span></label>
                <input
                   type="number"
                   id="amount"
@@ -91,13 +92,14 @@
                Expense
                </button>
             </div>
-            <div class="input-group">
-               <label class="sr-only" for="date">Date</label>
+            <div class="input-group-view-transaction">
+               <label class="sr-only-view-transactions" for="date" style="margin-top: 2rem;">Transaction Date</label>
                <input
                   type="date"
                   id="date"
                   name="transaction_date"
                   class="transaction_date"
+                  style="margin-top: 0;"
                />
             </div>
             <div class="actions">

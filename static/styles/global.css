@@ -80,6 +80,22 @@ body{
   border-width: 0;
 }
 
+.sr-only-view-transactions {
+  position: static;
+  width: auto;
+  height: auto;
+
+  clip: auto;
+  white-space: normal;
+
+  color: var(--color-dark);
+
+  font-weight: bold;
+
+  display: block;
+  text-align: left;
+}
+
 .close {
   display: none;
   color: var(--color-dark);

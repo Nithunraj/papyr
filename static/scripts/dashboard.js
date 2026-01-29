@@ -74,6 +74,11 @@ function toggleEditSave(btn) {
     dateField.readOnly = false;
   }
   else {
+    const form = document.getElementById("demoForm");
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;               
+    }
     btn.type = "submit";
     btn.closest("form").submit();
   }
