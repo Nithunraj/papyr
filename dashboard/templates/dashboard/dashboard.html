@@ -4,7 +4,39 @@
 <!-- END OF SIDEBAR -------------------- -->
 {% block content %}
 <div class="topMenu">
-    <h2 id="date-display"></h2>
+    <div class="date-wrapper">
+        <h2 id="date-display" onclick="toggleDateDropdown()">Today</h2>
+        <div id="date-dropdown" class="date-dropdown">
+            <div onclick="setDateRange('today')">Today</div>
+            <div onclick="setDateRange('yesterday')">Yesterday</div>
+            <div onclick="setDateRange('last7')">Last 7 Days</div>
+            <div onclick="setDateRange('last30')">Last 30 Days</div>
+            <div onclick="setDateRange('custom')">Custom date</div>
+        </div>
+    </div>
+    <!-- Custom Date Popup -->
+    <div id="customDateModal" class="custom-date-modal">
+    <div class="custom-date-content">
+        <h3>Select date range</h3>
+
+        <div class="date-fields">
+        <label>
+            From
+            <input type="date" id="customStartDate">
+        </label>
+
+        <label>
+            To
+            <input type="date" id="customEndDate">
+        </label>
+        </div>
+
+        <div class="actions">
+        <button onclick="closeCustomDate()">Cancel</button>
+        <button class="save" onclick="applyCustomDate()">Apply</button>
+        </div>
+    </div>
+    </div>
 </div>
 <section id="balance">
     <h2 class="sr-only">Balance</h2>

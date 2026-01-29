@@ -102,3 +102,171 @@ const ModalEditTransactions = {
     saveButtonViewDescription.classList.remove("save-mode");
   },
 };
+
+function toggleDateDropdown() {
+  const dropdown = document.getElementById("date-dropdown");
+  dropdown.style.display =
+    dropdown.style.display === "block" ? "none" : "block";
+}
+
+function setDateRange(type) {
+  const dateDisplay = document.getElementById("date-display");
+  const picker = document.getElementById("custom-date-picker");
+
+  picker.style.display = "none"; // hide by default
+
+  let formattedDate = "";
+  const today = new Date();
+
+  if (type === "today") {
+    formattedDate = formatSingleDate(today);
+  }
+
+  else if (type === "yesterday") {
+    const y = new Date();
+    y.setDate(today.getDate() - 1);
+    formattedDate = formatSingleDate(y);
+  }
+
+  else if (type === "last7") {
+    formattedDate = formatRange(6);
+  }
+
+  else if (type === "last30") {
+    formattedDate = formatRange(29);
+  }
+
+  else if (type === "custom") {
+    picker.style.display = "flex";
+    return;
+  }
+
+  dateDisplay.textContent = formattedDate;
+}
+
+function setDateRange(type) {
+  const labelMap = {
+    today: "Today",
+    yesterday: "Yesterday",
+    last7: "Last 7 Days",
+    last30: "Last 30 Days",
+    custom: "Custom Date"
+  };
+
+  let formattedDate = labelMap[type];
+
+  if (type === "custom") {
+    document.getElementById("customDateModal").style.display = "block";
+    document.getElementById("date-dropdown").style.display = "none";
+    return;
+  } else if (labelMap[type] == "Today"){
+    const today = new Date();
+    const month = today.toLocaleString("en-US", { month: "long" });
+    const day = today.getDate();
+
+    formattedDate = `${month}, ${day}`;
+  } else if (labelMap[type] === "Yesterday") {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    const month = yesterday
+      .toLocaleString("en-US", { month: "long" });
+    const day = yesterday.getDate();
+
+    formattedDate = `${month}, ${day}`;
+  } else if (labelMap[type] === "Last 7 Days") {
+    const endDate = new Date();          // today
+    const startDate = new Date();
+    startDate.setDate(endDate.getDate() - 6);
+
+    const sameYear = startDate.getFullYear() === endDate.getFullYear();
+
+    const startDay = startDate.getDate();
+    const startMonth = startDate.toLocaleString("en-US", { month: "short" });
+    const startYear = startDate.getFullYear();
+
+    const endDay = endDate.getDate();
+    const endMonth = endDate.toLocaleString("en-US", { month: "short" });
+    const endYear = endDate.getFullYear();
+
+    if (sameYear) {
+      formattedDate = `${startMonth} ${startDay} - ${endMonth} ${endDay}`;
+    } else {
+      formattedDate = `${startMonth} ${startDay}, ${startYear} - ${endMonth} ${endDay}, ${endYear}`;
+    }
+  } else if (labelMap[type] === "Last 30 Days") {
+    const endDate = new Date();          // today
+    const startDate = new Date();
+    startDate.setDate(endDate.getDate() - 29); // last 30 days incl today
+
+    const sameYear = startDate.getFullYear() === endDate.getFullYear();
+
+    const startDay = startDate.getDate();
+    const startMonth = startDate.toLocaleString("en-US", { month: "short" });
+    const startYear = startDate.getFullYear();
+
+    const endDay = endDate.getDate();
+    const endMonth = endDate.toLocaleString("en-US", { month: "short" });
+    const endYear = endDate.getFullYear();
+
+    if (sameYear) {
+      formattedDate = `${startMonth} ${startDay} - ${endMonth} ${endDay}`;
+    } else {
+      formattedDate = `${startMonth} ${startDay}, ${startYear} - ${endMonth} ${endDay}, ${endYear}`;
+    }
+  }
+
+  document.getElementById("date-display").innerText = formattedDate;
+  document.getElementById("date-dropdown").style.display = "none";
+
+  // TODO: call API / filter transactions
+  // fetchTransactions(type);
+}
+
+
+document.addEventListener("click", function (e) {
+  const wrapper = document.querySelector(".date-wrapper");
+  if (!wrapper.contains(e.target)) {
+    document.getElementById("date-dropdown").style.display = "none";
+  }
+});
+
+function closeCustomDate() {
+  document.getElementById("customDateModal").style.display = "none";
+}
+
+function formatDateRange(start, end) {
+  const sameYear = start.getFullYear() === end.getFullYear();
+
+  const startDay = start.getDate();
+  const startMonth = start.toLocaleString("en-US", { month: "short" });
+  const startYear = start.getFullYear();
+
+  const endDay = end.getDate();
+  const endMonth = end.toLocaleString("en-US", { month: "short" });
+  const endYear = end.getFullYear();
+
+  if (sameYear) {
+    return `${startMonth} ${startDay} - ${endMonth} ${endDay}`;
+  }
+
+  return `${startMonth} ${startDay}, ${startYear} - ${endMonth} ${endDay}, ${endYear}`;
+}
+
+function applyCustomDate() {
+  const startVal = document.getElementById("customStartDate").value;
+  const endVal = document.getElementById("customEndDate").value;
+
+  if (!startVal || !endVal) {
+    alert("Please select both dates");
+    return;
+  }
+
+  const start = new Date(startVal);
+  const end = new Date(endVal);
+
+  document.getElementById("date-display").textContent =
+    formatDateRange(start, end);
+
+  closeCustomDate();
+}
