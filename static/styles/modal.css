@@ -265,3 +265,7 @@ button.save-mode {
   justify-content: flex-end;
   gap: 0.5rem;
 }
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
