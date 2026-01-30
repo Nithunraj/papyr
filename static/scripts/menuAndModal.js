@@ -36,6 +36,28 @@ const Modal_incomes = {
   },
 };
 
+const overlay = document.getElementById("modalOverlayExpenses");
+const overlayIncome = document.getElementById("modalOverlayIncomes");
+
+overlay.addEventListener("click", function () {
+    Modal_incomes.close("expense");
+});
+
+overlayIncome.addEventListener("click", function () {
+    Modal_incomes.close("income");
+});
+
+// Prevent closing when clicking inside the modal
+document.querySelector("#modalOverlayExpenses .modal")
+    .addEventListener("click", function (e) {
+        e.stopPropagation();
+    });
+
+document.querySelector("#modalOverlayIncomes .modal")
+    .addEventListener("click", function (e) {
+        e.stopPropagation();
+    });
+
 // Display date (November, 24)
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
