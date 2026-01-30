@@ -8,53 +8,59 @@ const incomeButtonView = document.querySelector(".incomeButtonView");
 const expenseButtonView = document.querySelector(".expenseButtonView");
 const dateField = document.querySelector(".transaction_date")
 
-function openTransactionPopup(transactionId, title, walletId, categoryId, title, description, amount, transactionType, transactionId, transactionDate) {
-    document.getElementById("transaction_id").value=transactionId;
+function openTransactionPopup(row, transactionId, title, walletId, categoryId, title, description, amount, transactionType, transactionId, transactionDate) {
+  row.classList.add("row-active");
 
-    const saveButtonViewDescription = document.querySelector(".save-view-button-close");
-    saveButtonViewDescription.innerHTML = "Edit";
-    saveButtonViewDescription.type = "button";
-    const editTransactionHeader = document.querySelector(".view_transactions_header");
-    editTransactionHeader.innerHTML = "View Transaction";
+   setTimeout(() => {
+        row.classList.remove("row-active");
 
-    saveButtonViewDescription.classList.remove("save-mode");
+        document.getElementById("transaction_id").value=transactionId;
 
-    document.getElementById("transactionModal").classList.add("active");
+        const saveButtonViewDescription = document.querySelector(".save-view-button-close");
+        saveButtonViewDescription.innerHTML = "Edit";
+        saveButtonViewDescription.type = "button";
+        const editTransactionHeader = document.querySelector(".view_transactions_header");
+        editTransactionHeader.innerHTML = "View Transaction";
 
-    titleInput.value = title;
-    titleInput.readOnly = true;
+        saveButtonViewDescription.classList.remove("save-mode");
 
-    walletSelect.value = walletId;
+        document.getElementById("transactionModal").classList.add("active");
 
-    categorySelect.value = categoryId;
+        titleInput.value = title;
+        titleInput.readOnly = true;
 
-    descriptionInput.value = description;
-    descriptionInput.readOnly = true;
+        walletSelect.value = walletId;
 
-    amountInput.value = amount;
-    amountInput.readOnly = true;
+        categorySelect.value = categoryId;
 
-    transactionInput.value = transactionType;
+        descriptionInput.value = description;
+        descriptionInput.readOnly = true;
 
-    if (transactionType === "income") {
-        incomeButtonView.classList.add("income");
-        expenseButtonView.classList.remove("expense");
-    } else {
-        incomeButtonView.classList.remove("income");
-        expenseButtonView.classList.add("expense");
-    };
+        amountInput.value = amount;
+        amountInput.readOnly = true;
 
-    djangoDate = transactionDate.replace(", midnight", "");
-    const dateObj = new Date(djangoDate);
-    const formattedDate = dateObj.toISOString().split("T")[0];
-    
-    dateField.value = formattedDate;
-    dateField.readOnly = true;
+        transactionInput.value = transactionType;
 
-    walletSelect.disabled = true;
-    categorySelect.disabled = true;
-    incomeButtonView.disabled = true;
-    expenseButtonView.disabled = true;
+        if (transactionType === "income") {
+            incomeButtonView.classList.add("income");
+            expenseButtonView.classList.remove("expense");
+        } else {
+            incomeButtonView.classList.remove("income");
+            expenseButtonView.classList.add("expense");
+        };
+
+        djangoDate = transactionDate.replace(", midnight", "");
+        const dateObj = new Date(djangoDate);
+        const formattedDate = dateObj.toISOString().split("T")[0];
+        
+        dateField.value = formattedDate;
+        dateField.readOnly = true;
+
+        walletSelect.disabled = true;
+        categorySelect.disabled = true;
+        incomeButtonView.disabled = true;
+        expenseButtonView.disabled = true;
+    }, 150); 
 }
 
 function toggleEditSave(btn) {

@@ -13,6 +13,7 @@
     <tbody>
         {% for v in transactions %}
         <tr onclick="openTransactionPopup(
+        this,
         '{{ v.id }}',
         '{{ v.title_field }}',
         '{{ v.wallet.id }}',

@@ -271,13 +271,33 @@ button.save-mode {
 }
 
 .table-row-hower td {
-    transition: 
-        color 0.15s ease,
-        background-color 0.15s ease;
+    transition: background-color 0.15s ease, color 0.15s ease;
 }
 
+/* Background */
+.table-row-hower:hover td,
+.table-row-hower:active td {
+    background-color: var(--row-hover-bg);
+    background-clip: padding-box;
+}
+
+/* Text */
 .table-row-hower:hover td,
 .table-row-hower:active td {
     color: var(--text-hover);
+}
+
+.row-active {
     background-color: var(--row-hover-bg);
+}
+
+.row-active td {
+    color: var(--text-hover);
+}
+
+#data-table{
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
 }
