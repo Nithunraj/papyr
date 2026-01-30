@@ -15,6 +15,8 @@
   --color-primary-variante: #111e88;
   --color-dark-variant: #677483;
   --color-background:   #f6f6f9;
+  --text-hover: #4f5b66;
+  --row-hover-bg: rgba(0, 0, 0, 0.04);
 
   --card-border-radius: 2rem;
   --card-padding: 1.8rem;
@@ -32,6 +34,8 @@
   --color-dark-variant: #a3bdcc;
   --color-light: rgba(0, 0, 0, 0.4);
   --box-shadow: 0 2rem 3rem var(--color-light);
+  --text-hover: #d4e6f1;
+  --row-hover-bg: rgba(255, 255, 255, 0.05);
 }
 
 *{

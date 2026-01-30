@@ -269,3 +269,15 @@ button.save-mode {
 * {
   -webkit-tap-highlight-color: transparent;
 }
+
+.table-row-hower td {
+    transition: 
+        color 0.15s ease,
+        background-color 0.15s ease;
+}
+
+.table-row-hower:hover td,
+.table-row-hower:active td {
+    color: var(--text-hover);
+    background-color: var(--row-hover-bg);
+}
