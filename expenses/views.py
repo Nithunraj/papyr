@@ -29,14 +29,21 @@ def expense_by_category(request):
 def update_transactions(request):
     if request.method == "POST":
         instance = get_object_or_404(Transaction, id=request.POST.get("id"))
-        form = UpdateTransactionForm(request.POST, instance=instance)
+        action = request.POST.get("action")
+        
+        if action == "update":
+            form = UpdateTransactionForm(request.POST, instance=instance)
 
-        if form.is_valid():
-            form.save()
-            messages.success(request,"Sucessfully updated")
-            return redirect('dashboard')
+            if form.is_valid():
+                form.save()
+                messages.success(request,"Sucessfully updated")
+                return redirect('dashboard')
+            else:
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        messages.error(request, field + ' - ' + error)
+        
         else:
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, field + ' - ' + error)
+            instance.delete()
+            messages.success(request, "Successfully deleted")
     return redirect('dashboard')

@@ -13,7 +13,7 @@
          </div>
          <form action="{% url 'update_transactions' %}" method="post" id="demoForm">
             {% csrf_token %}
-            <input type="hidden" name="id" id="transaction_id" value="">
+            <input type="hidden" name="id" class="transaction_id" value="">
             <div class="drop-down-wallet-categories">
                <div>
                   <label class="sr-only-view-transactions" for="wallet">Wallet Type <span style="color:red">*</span></label>
@@ -103,9 +103,8 @@
                />
             </div>
             <div class="actions">
-               <!-- <a href="#" id="cancelTransaction" class="button cancel" onclick="Modal.close()">Cancelar</a> -->
-               <button class="delete" type="" style="margin-right:0.8rem">Delete</button>
-               <button class="save save-view-button-close" type="button" style="margin-left:0.8rem" onclick="toggleEditSave(this)">Update</button>
+               <button class="delete" type="submit" style="margin-right:0.8rem" name="action" value="delete">Delete</button>
+               <button class="save save-view-button-close" type="button" style="margin-left:0.8rem" onclick="toggleEditSave(this)" name="action" value="update">Update</button>
             </div>
          </form>
       </div>

@@ -8,13 +8,15 @@ const incomeButtonView = document.querySelector(".incomeButtonView");
 const expenseButtonView = document.querySelector(".expenseButtonView");
 const dateField = document.querySelector(".transaction_date")
 
-function openTransactionPopup(row, transactionId, title, walletId, categoryId, title, description, amount, transactionType, transactionId, transactionDate) {
+function openTransactionPopup(row, transactionId, walletId, categoryId, title, description, amount, transactionType, transactionDate) {
   row.classList.add("row-active");
 
    setTimeout(() => {
         row.classList.remove("row-active");
 
-        document.getElementById("transaction_id").value=transactionId;
+        document.querySelectorAll(".transaction_id").forEach(input => {
+          input.value=transactionId;
+        })
 
         const saveButtonViewDescription = document.querySelector(".save-view-button-close");
         saveButtonViewDescription.innerHTML = "Edit";
@@ -78,6 +80,8 @@ function toggleEditSave(btn) {
     incomeButtonView.disabled = false;
     expenseButtonView.disabled = false;
     dateField.readOnly = false;
+    descriptionInput.readOnly = false;
+    amountInput.readOnly = false;
   }
   else {
     const form = document.getElementById("demoForm");
