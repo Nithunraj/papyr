@@ -398,3 +398,32 @@ canvas{
 @keyframes fadeOut {
   to { opacity: 0; transform: translateX(100%); }
 }
+
+.table-container-overview {
+    padding: 0rem;
+    background-color: var(--color-background);
+
+    margin-top: 5rem;
+
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table-container-overview table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+}
+
+.table-container-overview th,
+.table-container-overview td {
+    padding: 8px 12px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.table-container-overview td:last-child,
+.table-container-overview th:last-child {
+    white-space: nowrap;
+    text-align: right;
+}

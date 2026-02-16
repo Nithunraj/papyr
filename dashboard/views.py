@@ -42,6 +42,20 @@ def dashboard(request):
 
     return render(request, "dashboard/dashboard.html", context)
 
+def data_overview(request):
+    transactions = (
+        Transaction.objects
+        .filter(user=request.user)
+        .select_related("wallet", "category")
+        .order_by("-transaction_date")
+    )
+
+    context = {
+        "transactions": transactions,
+    }
+
+    return render(request, "dashboard/overview.html", context)
+
 def add_transactions(request):
     if request.method == "POST":
         form = AddTransactionForm(request.POST)
